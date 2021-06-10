@@ -1,0 +1,31 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block title%}
+    <title>Blog</title>
+{% endblock %}
+{% block content %}
+    {% for post in posts %}
+        <!-- Heading -->
+        <section class="page-section clearfix">
+            <div class="container">
+                <div class="intro">
+                    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{ post.imagePost.url }}" alt="" style='width: 50%; float: right;'>
+                    <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                        <h2 class="section-heading mb-4">
+                            <span class="section-heading-lower">{{ post.titlePost|upper }}</span>
+                            <span class="section-heading-upper">{{ post.contentPost }}</span>
+                        </h2>
+                        <h3 style='text-align: left; font-size: 70%;'>
+                            Author: {{ post.authorPost }}
+                            <br/>
+                            Category: 
+                            {% for category in post.categoryPost.all %}
+                                <a href="{% url 'blog:Category' category.id %}" class="linkCategory">{{ category.nameCategory }}</a>
+                            {% endfor %}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'Base.html' %}
+{% load static%}
+{% block title %}
+    <title>Contact</title>
+{% endblock %}
+{% block content %}
+    <div style="background-color: rgba(24, 64, 8, 0.8); width: 40%; margin: 10px auto; border-radius: 5px;">
+        {% if "is_valid" in request.GET %}
+            <p style="color: white;">The form is correct</p>
+        {% elif "not_is_valid" in request.GET %}
+            <p style="color: white;">The form is error</p>
+        {% endif %}
+        <form action="" method="POST" style="color: white;">
+            {% csrf_token %}
+            <table style="margin: auto;">
+                {{ contactForm }}
+            </table>
+            <div style="width: 30%; margin: auto;">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block title%}
+    <title>Store</title>
+{% endblock %}
+{% block content %}
+    {% for product in products %}
+        <!-- Heading -->
+        <section class="page-section clearfix">
+            <div class="container">
+                <div class="intro">
+                    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{ product.imageProduct.url }}" alt="" style='width: 50%; float: right;'>
+                    <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                        <h2 class="section-heading mb-4">
+                            <span class="section-heading-lower">{{ product.nameProduct|upper }}</span>
+                            <span class="section-heading-upper">{{ product.priceProduct }}</span>
+                            {% if product.availableProduct %}
+                                Available
+                            {% else %}
+                                Exhausted
+                            {% endif %}
+                        </h2>
+                        <h3 style='text-align: left; font-size: 70%;'>
+                            Author: {{ product.authorProduct }}
+                            <br/>
+                            Category: 
+                            {% for category in product.categoryProduct.all %}
+                                {{ category.nameCategory }}
+                            {% endfor %}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+{% endblock %}
